@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+require 'bundler'
+Bundler.require
+Dotenv.load
+
+require_relative 'lib/download_command'
+
+class Cli < Thor
+  desc "download", "download all objects in a given bucket"
+  method_option :bucket, :aliases => "-b", :desc => "bucket key", :required => true
+  method_option :dir, :aliases => "-d", :desc => "dir to download to", :default => './'
+  def download
+    DownloadCommand.new(options).execute
+  rescue Exception => e
+    log e
+  end
+
+  private
+
+  def log e
+    STDERR.puts e.to_s.red
+    STDERR.puts e.backtrace
+    exit 1
+  end
+end
+
+Cli.start(ARGV)
