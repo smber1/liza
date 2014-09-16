@@ -28,7 +28,11 @@ class DownloadCommand
   end
 
   def file_path filename
-    File.join dir, filename
+    File.join dir, friendly_filename(filename)
+  end
+
+  def friendly_filename filename
+    filename.gsub(/\//,'-')
   end
 
   def s3
