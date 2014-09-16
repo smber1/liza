@@ -9,8 +9,9 @@ Works on Ruby 2.1.2
 Installation
 ------------
     $ cp dotEnv .env
-    
+
 Enter your AWS creds
+
     $ bundle install
 
     $ liza
